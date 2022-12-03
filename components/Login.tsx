@@ -20,37 +20,39 @@ const Login: React.FC = () => {
     }
 
     return (
-        <div className="p-10 flex item-center flex-col bg-black  bg-opacity-75 text-zinc-100">
-        <form onSubmit={submitHandler} className="border-b border-black pb-5">
+        <div className="p-10 md:p-16 flex item-center flex-col bg-black  bg-opacity-75 text-zinc-100">
+            <div>
+                <h1 className="text-2xl font-bold">Sign In</h1>
+            </div>
+        <form onSubmit={submitHandler} className="border-b border-black pb-5 mt-10">
           <div className="flex flex-col w-full">
             <label htmlFor="email">Email:</label>
-            <input type="email" id="email" onChange={emailChangeHandler} className="border-2 rounded-md pl-1 pr-1 border-slate-400" />
+            <input type="email" id="email" onChange={emailChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full mt-5">
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" onChange={passwordChangeHandler} className="border-2 rounded-md pl-1 pr-1 border-slate-400" />
+            <input type="password" id="password" onChange={passwordChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
             </div>
-            <div className=" mt-5 flex justify-center gap-5">
-              <button type="submit" className="bg-blue-400 hover:bg-blue-500 active:scale-95 rounded-md pl-3 pr-3 p-2 shadow-md cursor-pointer">Sign in</button>
-              <Link href="/signup"><button className=" rounded-md bg-zinc-200 p-2 pl-3 pr-3 shadow-md cursor-pointer active:scale-95 hover:bg-zinc-300">Sign up</button></Link>
+            <div className=" mt-10">
+              <button type="submit" className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button>
             </div>
         </form>
 
       <div className="mt-5">
       <button
-        className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center shadow-sm border w-full"
+        className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center shadow-sm border w-full text-black justify-center active:scale-95"
         // onClick={signInWithGoogle}
       >
         <Image src="/google.png" alt="Google sign in" width={30} height={30} />{" "}
         Sign in with Google
       </button>
       </div>
-      <div className="mt-5">
+      <div className="mt-5 w-full">
       <button
-        className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center shadow-sm border"
+        className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center justify-center shadow-sm border text-black w-full active:scale-95"
         // onClick={signInAnonymouslyHandler}
       >
-        <Image src="/anon.svg" alt="anon sign in" width={30} height={30} />{" "}
+        <Image src="/anon.svg" alt="anon" width={30} height={30} />{" "}
         Sign in anonymously
       </button>
       </div>
