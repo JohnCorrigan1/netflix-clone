@@ -3,10 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import Featured from "../models/featured";
+import FeaturedMovie from "../models/FeaturedMovie";
 
 const Home: NextPage = () => {
-  const [mustWatch, setMustWatch] = useState<Featured | null>(null);
+  const [mustWatch, setMustWatch] = useState<FeaturedMovie | null>(null);
 
   useEffect(() => {
     getTrending();
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     const featured = movies.results[0];
     console.log(featured);
     setMustWatch(
-      new Featured(
+      new FeaturedMovie(
         featured.id,
         featured.title,
         featured.mediaType,
