@@ -13,3 +13,5 @@ const Accounts: NextPage = () => {
         </div>
     )
 }
+
+export default Accounts
