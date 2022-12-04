@@ -66,12 +66,12 @@ const CreateAccount: React.FC = () => {
       </button>
       </div>
       <div className="flex justify-center mt-5">
-        <p className=" text-center flex gap-3">
+        <div className=" text-center flex gap-3">
             Already have an account?{" "}
             <Link href="/signin">
                 <p className="text-main font-semibold hover:underline">Log In.</p>
             </Link>
-        </p>
+        </div>
       </div>
       </div>
     )
