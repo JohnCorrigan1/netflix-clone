@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const Login: React.FC = () => {
+const CreateAccount: React.FC = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,10 +20,14 @@ const Login: React.FC = () => {
         setPassword(e.target.value);
     }
 
+    const confirmPasswordChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(e.target.value);
+    }
+
     return (
         <div className="p-10 md:p-16 flex item-center flex-col bg-black  bg-opacity-75 text-zinc-100">
             <div>
-                <h1 className="text-3xl font-bold">Sign In</h1>
+                <h1 className="text-3xl font-bold">Create Account</h1>
             </div>
         <form onSubmit={submitHandler} className="border-b border-black pb-5 mt-10">
           <div className="flex flex-col w-full">
@@ -32,6 +37,10 @@ const Login: React.FC = () => {
           <div className="flex flex-col w-full mt-5">
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" onChange={passwordChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
+            </div>
+            <div className="flex flex-col w-full mt-5">
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" onChange={confirmPasswordChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
             </div>
             <div className=" mt-10">
               <button type="submit" className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button>
@@ -58,9 +67,9 @@ const Login: React.FC = () => {
       </div>
       <div className="flex justify-center mt-5">
         <p className=" text-center flex gap-3">
-            New to Notflix?{" "}
-            <Link href="/signup">
-                <p className="text-main font-semibold hover:underline">Sign up now.</p>
+            Already have an account?{" "}
+            <Link href="/signin">
+                <p className="text-main font-semibold hover:underline">Log In.</p>
             </Link>
         </p>
       </div>
@@ -68,4 +77,4 @@ const Login: React.FC = () => {
     )
 }
 
-export default Login;
+export default CreateAccount;
