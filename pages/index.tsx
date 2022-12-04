@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     getTrending();
     getConfig();
-  }, []);
+  });
 
   const getTrending = async () => {
     const data = await fetch(
