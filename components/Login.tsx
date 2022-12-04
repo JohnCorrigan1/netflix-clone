@@ -13,8 +13,19 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const auth = getAuth();
+        await signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            toast.success("Signed in with email and password");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            toast.error("Error: " + errorMessage, errorCode);
+          });
     }
 
     const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +39,6 @@ const Login: React.FC = () => {
     const signInWithGoogle = async () => {
       await signInWithPopup(auth, googleProvider);
       toast.success("Signed in with Google");
-      console.log(user)
     };
 
     const signInAnonymouslyHandler = async () => {
