@@ -5,7 +5,7 @@ import { auth } from "../lib/firebase"
 const NavBar: React.FC = () => {
 
     return(
-        <div className="flex justify-between items-center bg-zinc-900 p-5  bg-opacity-90">
+        <div className="flex justify-between items-center bg-zinc-900 p-5  bg-opacity-0 fixed w-full">
             <div className="flex gap-5 items-center">
                 <Image src="/logo.png" height={60} width={100} alt="Netflix" />
                 <div className="flex gap-5 items-center">

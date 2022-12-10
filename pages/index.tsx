@@ -1,49 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+// import Image from "next/image";
+// import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import FeaturedMovie from "../models/FeaturedMovie";
-
+// import FeaturedMovie from "../models/FeaturedMovie";
+import Feature from "../components/Feature";
+import FeatureInfo from "../components/FeatureInfo";
 const Home: NextPage = () => {
-  const [mustWatch, setMustWatch] = useState<FeaturedMovie | null>(null);
-
-  useEffect(() => {
-    getTrending();
-    getConfig();
-  });
-
-  const getTrending = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/trending/all/week?api_key=f9e8c6b0f08e00ab858099b6fe804ea3"
-    );
-
-    const movies = await data.json();
-    const featured = movies.results[0];
-    console.log(featured);
-    setMustWatch(
-      new FeaturedMovie(
-        featured.id,
-        featured.title,
-        featured.mediaType,
-        featured.poster_path,
-        featured.backdrop_path,
-        featured.vote_average,
-        featured.overview,
-        featured.release_date
-      )
-    );
-    console.log(mustWatch);
-  };
-
-  const getConfig = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/configuration?api_key=f9e8c6b0f08e00ab858099b6fe804ea3"
-    );
-
-    const config = await data.json();
-    console.log(config);
-  };
+  
 
   return (
     <div className="">
@@ -53,18 +17,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      {mustWatch && (
-        <div>
-          <h1 className="text-4xl text-main">{mustWatch.title}</h1>
-          <Image
-            src={mustWatch.backdropPath}
-            height={1080}
-            width={1920}
-            alt={mustWatch.title}
-          />
-          {/* <img src={mustWatch.posterPath} alt={mustWatch.title} /> */}
+        <div className="">
+          <FeatureInfo title="title" />
+        {/* <div className=" z-50 absolute text-white top-28 left-10 info">
+            <h1 className="text-4xl font bold">test</h1>
+          </div> */}
+          <Feature />
         </div>
-      )}
     </div>
   );
 };
