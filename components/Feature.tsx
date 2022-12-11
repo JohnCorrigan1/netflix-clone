@@ -1,10 +1,13 @@
 import Image from "next/image";
 import FeaturedMovie from "../models/FeaturedMovie";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FeatureInfo from "./FeatureInfo";
+import { MovieContext } from "../lib/MovieContext";
 
 const Feature: React.FC = () => {
   const [mustWatch, setMustWatch] = useState<FeaturedMovie | null>(null);
+
+  const moviesContext = useContext(MovieContext);
 
   useEffect(() => {
     getTrending();
@@ -17,7 +20,7 @@ const Feature: React.FC = () => {
     );
 
     const movies = await data.json();
-    const featured = movies.results[0];
+    const featured = movies.results[1];
     console.log(featured);
     setMustWatch(
       new FeaturedMovie(
@@ -31,10 +34,23 @@ const Feature: React.FC = () => {
         featured.release_date
       )
     );
+    movies.results.forEach((movie: any) => {
+      moviesContext.addMovieHandler(
+        new FeaturedMovie(
+          movie.id,
+          movie.title,
+          movie.mediaType,
+          movie.poster_path,
+          movie.backdrop_path,
+          movie.vote_average,
+          movie.overview,
+          movie.release_date
+        )
+      );
+    });
     console.log(mustWatch);
+    console.log(moviesContext.movies);
   };
-
-  
 
   const getConfig = async () => {
     const data = await fetch(
@@ -49,9 +65,9 @@ const Feature: React.FC = () => {
     <>
       {mustWatch && (
         <>
-        <div className="z-50">
-            <FeatureInfo title={mustWatch.title} />
-            </div>
+          <div className="z-50">
+            <FeatureInfo />
+          </div>
           <div className="feature -z-50">
             <Image
               className="poster"
