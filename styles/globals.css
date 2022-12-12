@@ -22,3 +22,8 @@ body {
 .info {
   z-index: 999;
 }
+
+.home {
+  margin-bottom: 20px;
+  height: 100%;
+}
