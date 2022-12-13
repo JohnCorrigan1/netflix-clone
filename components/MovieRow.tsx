@@ -8,13 +8,13 @@ const MovieRow: React.FC = () => {
 
   const moviesContext = useContext(MovieContext);
   const groupOne = moviesContext.movies.slice(0, 6);
-  const groupTwo = moviesContext.movies.slice(6, 12);
-  const groupThree = moviesContext.movies.slice(12, 18);
-  const groupFour = moviesContext.movies.slice(14, 20);
+  // const groupTwo = moviesContext.movies.slice(6, 12);
+  // const groupThree = moviesContext.movies.slice(12, 18);
+  // const groupFour = moviesContext.movies.slice(14, 20);
   return (
     <div className="flex gap-10 w-full justify-center items-center">
 
-      {count > 0 && <div className="flex items-center cursor-pointer hover:bg-zinc-600 rounded-lg">
+      {count && <div className="flex items-center cursor-pointer hover:bg-zinc-600 rounded-lg translate-x-1/4">
         <Image
           src="/left.svg"
           height={100}
@@ -23,11 +23,11 @@ const MovieRow: React.FC = () => {
           onClick={() => setCount(count - 1)}
         />
       </div> }
-      {count === 0 &&
-        groupOne.map((movie) => {
+      {count &&
+        moviesContext.movies.map((movie) => {
           return <MovieCard movie={movie} />;
         })}
-      {count === 1 &&
+      {/* {count === 1 &&
         groupTwo.map((movie) => {
           return <MovieCard movie={movie} />;
         })}
@@ -38,7 +38,7 @@ const MovieRow: React.FC = () => {
       {count === 3 &&
         groupFour.map((movie) => {
           return <MovieCard movie={movie} />;
-        })}
+        })} */}
       {count < 3 && <div className="flex items-center cursor-pointer hover:bg-zinc-600 rounded-lg">
         <Image
           src="/right.svg"

@@ -6,7 +6,7 @@ const MovieCard: React.FC<{movie: FeaturedMovie}> = (props) => {
     const [isShown, setIsShown] = useState(false);
 
     return (
-        <div className="hover:scale-110 duration-1000 hover:bg-zinc-800 hover:bg-opacity-50 hover:p-5 rounded-lg max-w-sm hover:z-50 hover:translate-y-10"
+        <div className="hover:scale-110 duration-1000 hover:bg-zinc-800 hover:bg-opacity-50 hover:p-5 min-w-[250px] rounded-lg max-w-sm hover:z-50 hover:translate-y-10"
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}>
         <Image
