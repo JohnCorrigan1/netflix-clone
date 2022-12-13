@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import Image from "next/image";
 
 const MovieRow: React.FC = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(2);
 
   const moviesContext = useContext(MovieContext);
   const groupOne = moviesContext.movies.slice(0, 6);
@@ -12,9 +12,9 @@ const MovieRow: React.FC = () => {
   // const groupThree = moviesContext.movies.slice(12, 18);
   // const groupFour = moviesContext.movies.slice(14, 20);
   return (
-    <div className="flex gap-10 w-full justify-center items-center">
+    <div className="flex gap-10 w-full justify-center items-center overflow-hidden">
 
-      {count && <div className="flex items-center cursor-pointer hover:bg-zinc-600 rounded-lg translate-x-1/4">
+  <div className="absolute left-2 flex items-center cursor-pointer hover:bg-zinc-800 hover:bg-opacity-50 rounded-lg z-50">
         <Image
           src="/left.svg"
           height={100}
@@ -22,11 +22,12 @@ const MovieRow: React.FC = () => {
           alt="left"
           onClick={() => setCount(count - 1)}
         />
-      </div> }
-      {count &&
-        moviesContext.movies.map((movie) => {
+      </div> 
+      <div className={"duration-1000 flex gap-3 justify-center z-0"}>
+      { moviesContext.movies.map((movie) => {
           return <MovieCard movie={movie} />;
         })}
+        </div>
       {/* {count === 1 &&
         groupTwo.map((movie) => {
           return <MovieCard movie={movie} />;
@@ -39,7 +40,7 @@ const MovieRow: React.FC = () => {
         groupFour.map((movie) => {
           return <MovieCard movie={movie} />;
         })} */}
-      {count < 3 && <div className="flex items-center cursor-pointer hover:bg-zinc-600 rounded-lg">
+   <div className="absolute right-2 flex items-center cursor-pointer hover:bg-zinc-800 hover:bg-opacity-50 rounded-lg z-50">
         <Image
           src="/right.svg"
           height={100}
@@ -47,7 +48,7 @@ const MovieRow: React.FC = () => {
           alt="left"
           onClick={() => setCount(count + 1)}
         />
-      </div> }
+      </div> 
     </div>
   );
 };
