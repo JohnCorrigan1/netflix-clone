@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const MovieRow: React.FC = () => {
   const [count, setCount] = useState(0);
-  const [position, setPosition] = useState(100);
+  const [position, setPosition] = useState(0);
   // const [sliderPosition, setSliderPosition] = useState("");
 
   // const sliderPosition = "-translate-x-[" + position.toString() + "%]"
@@ -15,12 +15,15 @@ const MovieRow: React.FC = () => {
     setCount(count + 1)
     setPosition(position + 100)
     // setSliderPosition("-translate-x-[" + position + "%")
-    console.log(count)
+    console.log(count, position)
   }
+
+  const sliderPosition = "-translate-x-[" + position.toString() + "%]"
 
   const decrementHandler = () => {
     setPosition(position - 100)
     setCount(count - 1)
+    console.log(count, position)
     // setSliderPosition("-translate-x-[" + position + "%")
   }
 
@@ -34,10 +37,10 @@ const MovieRow: React.FC = () => {
           height={100}
           width={100}
           alt="left"
-          onClick={incrementHandler}
+          onClick={decrementHandler}
         />
       </div>
-      <div className={"duration-1000 flex gap-3 justify-center z-0 hover:-translate-x-[100%]"}>
+      <div className={(count === 0 ? "" : sliderPosition) + " duration-1000 flex gap-3 justify-center z-0 "}>
       { moviesContext.movies.map((movie) => {
           return <MovieCard movie={movie} />
         })}
@@ -48,7 +51,7 @@ const MovieRow: React.FC = () => {
           height={100}
           width={100}
           alt="left"
-          onClick={decrementHandler}
+          onClick={incrementHandler}
         />
       </div> 
     </div>
