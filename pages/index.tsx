@@ -8,8 +8,6 @@ import Feature from "../components/Feature";
 import FeatureInfo from "../components/FeatureInfo";
 import MovieRow from "../components/MovieRow";
 const Home: NextPage = () => {
-  
-
   return (
     <div className="bg-zinc-900 mb-10 home">
       <Head>
@@ -20,9 +18,6 @@ const Home: NextPage = () => {
       <NavBar />
         <div className="">
           <FeatureInfo />
-        {/* <div className=" z-50 absolute text-white top-28 left-10 info">
-            <h1 className="text-4xl font bold">test</h1>
-          </div> */}
           <Feature />
         </div>
         <div className="mb-20 mt-10">
@@ -34,7 +29,6 @@ const Home: NextPage = () => {
         <div className="mb-20 mt-10">
         <MovieRow />       
         </div>
-        {/* <div className="h-96"></div> */}
     </div>
   );
 };

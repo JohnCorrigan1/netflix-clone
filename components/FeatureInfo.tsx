@@ -11,7 +11,7 @@ const FeatureInfo: React.FC = () => {
 
     return (
         <div className=" z-50 absolute text-white top-60 left-28 info flex flex-col gap-16">
-            <h1 className="text-6xl font bold">movies[5].title</h1>
+            <h1 className="text-6xl font bold">movies[2].title</h1>
             <div className="flex gap-5 w-full justify-center text-zinc-900">
                 <button className="pr-8 pl-8 p-2 bg-zinc-200 text-2xl font-bold rounded-sm hover:bg-zinc-400 flex justify-center items-center gap-2">
                     <Image src="/play_arrow.svg" height={40} width={40} alt="play" />
