@@ -66,7 +66,7 @@ const Feature: React.FC = () => {
       {mustWatch && (
         <>
           <div className="z-50">
-            <FeatureInfo />
+            {moviesContext.movies[1].title && <FeatureInfo />}
           </div>
           <div className="feature -z-50">
             <Image

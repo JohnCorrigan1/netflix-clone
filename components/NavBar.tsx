@@ -1,11 +1,30 @@
 import Link from "next/link"
 import Image from "next/image"
 import { auth } from "../lib/firebase"
+import { useState, useEffect } from "react"
 
 const NavBar: React.FC = () => {
 
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > 20) {
+            setScrolled(true);
+          } else {
+            setScrolled(false);
+          }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+
     return(
-        <div className="flex justify-between items-center bg-zinc-900 p-5  bg-opacity-0 fixed w-full">
+        <div className={`flex justify-between items-center p-5 fixed w-full ${scrolled ? 'bg-gray-800' : 'bg-transparent'}`}>
             <div className="flex gap-5 items-center">
                 <Image src="/logo.png" height={60} width={100} alt="Netflix" />
                 <div className="flex gap-5 items-center">

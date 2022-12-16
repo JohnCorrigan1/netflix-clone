@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import MovieContextProvider from "../lib/MovieContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  
   const [user] = useAuthState(auth);
 
   return (
