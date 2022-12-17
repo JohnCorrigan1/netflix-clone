@@ -24,7 +24,7 @@ const NavBar: React.FC = () => {
       }, []);
 
     return(
-        <div className={`flex justify-between items-center p-5 fixed w-full ${scrolled ? 'bg-gray-800' : 'bg-transparent'}`}>
+        <div className={`flex z-50 justify-between items-center pt-2 pl-5 pr-5 pb-2 fixed w-full ${scrolled ? 'bg-gray-900 bg-opacity-80' : 'bg-transparent'}`}>
             <div className="flex gap-5 items-center">
                 <Image src="/logo.png" height={60} width={100} alt="Netflix" />
                 <div className="flex gap-5 items-center">
