@@ -29,21 +29,24 @@ const NavBar: React.FC = () => {
                 <Image src="/logo.png" height={60} width={100} alt="Netflix" />
                 <div className="flex gap-5 items-center">
                     <Link href="/">
-                        <p className="text-zinc-100 hover:text-main">Home</p>
+                        <p className="text-zinc-100 hover:text-main font-semibold hover:-translate-y-2 duration-200">Home</p>
                     </Link>
                     <Link href="/movies">
-                        <p className="text-zinc-100 hover:text-main">Movies</p>
+                        <p className="text-zinc-100 hover:text-main font-semibold hover:-translate-y-2 duration-200">Movies</p>
                     </Link>
                     <Link href="/series">
-                        <p className="text-zinc-100 hover:text-main">Series</p>
+                        <p className="text-zinc-100 hover:text-main font-semibold hover:-translate-y-2 duration-200">Series</p>
+                    </Link>
+                    <Link href="/favorites">
+                        <p className="text-zinc-100 hover:text-main font-semibold hover:-translate-y-2 duration-200">Favorites</p>
                     </Link>
                 </div>
             </div>
             <div className="flex gap-5 items-center">
                 <Link href="/accounts">
-                    <p className="text-zinc-100 hover:text-main">Switch Account</p>
+                    <p className="text-zinc-100 hover:text-main font-semibold hover:-translate-y-2 duration-200">Switch Account</p>
                 </Link>
-                <p onClick={() => auth.signOut()} className="text-zinc-100 hover:text-main  hover:cursor-pointer">Log out</p>
+                <p onClick={() => auth.signOut()} className="text-zinc-100 hover:text-main  hover:cursor-pointer font-semibold hover:-translate-y-2 duration-200">Log out</p>
             </div>
         </div>
     )

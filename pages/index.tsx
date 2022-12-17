@@ -7,6 +7,7 @@ import NavBar from "../components/NavBar";
 import Feature from "../components/Feature";
 import FeatureInfo from "../components/FeatureInfo";
 import MovieRow from "../components/MovieRow";
+import MovieModal from "../components/MovieModal";
 const Home: NextPage = () => {
   return (
     <div className="bg-zinc-900 mb-10 home overflow-hidden">
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
           <FeatureInfo />
           <Feature />
         </div>
+        <MovieModal />
         <div className="mb-20 mt-10">
         <MovieRow />       
         </div>
