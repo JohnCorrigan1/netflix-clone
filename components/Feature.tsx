@@ -21,7 +21,7 @@ const Feature: React.FC = () => {
 
     const movies = await data.json();
     const featured = movies.results[1];
-    console.log(featured);
+    console.log("yup",featured);
     setMustWatch(
       new FeaturedMovie(
         featured.id,
@@ -48,8 +48,6 @@ const Feature: React.FC = () => {
         )
       );
     });
-    console.log(mustWatch);
-    console.log(moviesContext.movies);
   };
 
   const getConfig = async () => {
