@@ -8,7 +8,6 @@ import toast from 'react-hot-toast';
 
 
 const Login: React.FC = () => {
-    const { user } = useContext(UserContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

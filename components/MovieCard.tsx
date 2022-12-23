@@ -13,10 +13,15 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
     currentContext.setCurrent(props.movie);
   };
 
+  const enterHandler = (e: React.MouseEvent) => {
+    setIsShown(true);
+    }  
+
   return (
     <div
-      className="hover:scale-110 duration-1000 hover:bg-opacity-50 min-w-[16%] rounded-lg max-w-sm hover:z-50"
-      onMouseEnter={() => setIsShown(true)}
+      className=" duration-1000 hover:bg-opacity-50 min-w-[16%] rounded-lg max-w-sm "
+
+      onMouseEnter={enterHandler}
       onMouseLeave={() => setIsShown(false)}
       onClick={modalHandler}
     >
@@ -27,11 +32,18 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
         alt={props.movie.title}
       />
 
-      {/* {isShown && (
-            <div className="bg-zinc-900 bg-opacity-50 w-full h-full flex flex-col justify-center items-center">
-                <h1 className="text-2xl font-bold text-zinc-100">{props.movie.title}</h1>
-                <p className="text-zinc-100">{props.movie.overview}</p>
-                </div> )} */}
+      {isShown && (
+        <div className=" absolute z-[1000] top-0 -translate-x-[10%] w-[250px] bg-zinc-600 h-[400px] rounded-xl shadow-lg p-1 -translate-y-5 hover:scale-125 duration-1000">
+          <Image
+          className="rounded-xl"
+        src={props.movie.backdropPath}
+        height={200}
+        width={350}
+        alt={props.movie.title}
+      /> 
+      <p className="text-zinc-100 p-5">{props.movie.overview}</p>
+      
+      </div>)}
     </div>
   );
 };
