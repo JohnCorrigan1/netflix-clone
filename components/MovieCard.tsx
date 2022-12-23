@@ -33,7 +33,7 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
       />
 
       {isShown && (
-        <div className=" absolute z-[1000] top-0 -translate-x-[10%] w-[250px] bg-zinc-600 h-[400px] rounded-xl shadow-lg p-1 -translate-y-5 hover:scale-125 duration-1000">
+        <div className=" absolute z-[1000] top-0 -translate-x-[10%] w-[250px] bg-zinc-600  rounded-xl shadow-lg p-1 -translate-y-5 hover:scale-125 duration-1000">
           <Image
           className="rounded-xl"
         src={props.movie.backdropPath}
@@ -41,7 +41,7 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
         width={350}
         alt={props.movie.title}
       /> 
-      <p className="text-zinc-100 p-5">{props.movie.overview}</p>
+      <p className="text-zinc-100 p-5 text-sm">{props.movie.overview}</p>
       
       </div>)}
     </div>
