@@ -51,7 +51,6 @@ const MovieRow: React.FC = () => {
   }
 
   const moviesContext = useContext(MovieContext);
-  console.log("in row",moviesContext.movies);
   return (
     <div className="flex gap-10 w-full justify-center items-center z-0">
 
@@ -64,9 +63,9 @@ const MovieRow: React.FC = () => {
          
         />
       </div>
-      <div className={sliderPosition + " duration-1000 flex gap-3 justify-center "}>
+      <div className={sliderPosition + " duration-1000 flex gap-1 justify-center pl-10 pr-10"}>
       { moviesContext.movies.map((movie, index) => {
-          return <MovieCard movie={movie} key={index} />         
+          return <MovieCard movie={movie} key={index} />  
         })}
         </div>
    <div onClick={incrementHandler} className="absolute right-2 flex items-center cursor-pointer hover:bg-zinc-800 hover:bg-opacity-50 rounded-lg z-50">

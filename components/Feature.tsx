@@ -70,11 +70,12 @@ const Feature: React.FC = () => {
             <Image
               className="poster"
               src={mustWatch.backdropPath}
-              width={1920}
+              width={window.outerWidth}
               height={600}
               alt={mustWatch.title}
             />
           </div>
+          console.log(moviesContext.movies)
         </>
       )}
     </>
