@@ -6,12 +6,14 @@ import CurrentContextProvider from "../lib/CurrentContext";
 import { auth } from "./../lib/firebase";
 import { Toaster } from "react-hot-toast";
 import MovieContextProvider from "../lib/MovieContext";
+import LibraryContextProvider from "../lib/FavoritesContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   
   const [user] = useAuthState(auth);
 
   return (
+    <LibraryContextProvider>
     <CurrentContextProvider>
     <MovieContextProvider>
       <UserContext.Provider value={{ user }}>
@@ -20,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </UserContext.Provider>
     </MovieContextProvider>
     </CurrentContextProvider>
+    </LibraryContextProvider>
   );
 }
 

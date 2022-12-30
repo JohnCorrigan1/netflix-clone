@@ -34,6 +34,11 @@ body {
   display: none;
 }
 
+.library {
+  min-height: 100vh;
+  min-width: 100vw;;
+}
+
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */

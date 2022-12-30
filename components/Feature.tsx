@@ -75,7 +75,6 @@ const Feature: React.FC = () => {
               alt={mustWatch.title}
             />
           </div>
-          console.log(moviesContext.movies)
         </>
       )}
     </>

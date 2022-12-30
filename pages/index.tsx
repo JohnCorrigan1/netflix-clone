@@ -7,11 +7,12 @@ import MovieRow from "../components/MovieRow";
 import MovieModal from "../components/MovieModal";
 import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
+import { MovieContext } from "../lib/MovieContext";
 
 const Home: NextPage = () => {
 
   const currentContext = useContext(CurrentContext);
-
+  const moviesContext = useContext(MovieContext);
   return (
     <div className="bg-zinc-900 mb-10 home overflow-hidden scroll smooth">
       <Head>
@@ -25,14 +26,14 @@ const Home: NextPage = () => {
           <Feature />
         </div>
         <MovieModal open={currentContext.isOpen} movie={currentContext.movie} />
-        <div className="mb-20 mt-10">
-        <MovieRow />       
+        <div className="mb-10 mt-10">
+        <MovieRow movies={moviesContext.movies} />       
         </div>
-        <div className="mb-20 mt-10">
-        <MovieRow />       
+        <div className="mb-10 mt-10">
+        <MovieRow movies={moviesContext.movies} />       
         </div>
-        <div className="mb-20 mt-10">
-        <MovieRow />       
+        <div className="mb-10 mt-10">
+        <MovieRow movies={moviesContext.movies} />       
         </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import FeaturedMovie from "../models/FeaturedMovie";
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 
 
 type MovieContextType = {
