@@ -34,6 +34,7 @@ return (
       <div className="flex w-full">
       <h2 className=" ml-16 font-semibold">{releaseYear}</h2>
         <h2 className=" ml-16 font-semibold">{props.movie?.mediaType}</h2>
+        <Image src="/add.svg" height={30} width={30}/>
 
       </div>
   </div>
