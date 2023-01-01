@@ -44,3 +44,44 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.showInfo {
+
+  -webkit-animation: movieHover 1s;
+  -moz-animation: movieHover 1s;
+  animation: movieHover 1s;
+ 
+}
+
+@-webkit-keyframes movieHover {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+@-moz-keyframes movieHover {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+@keyframes movieHover {
+  0% {
+    transform: translateX(0px);
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    transform: translateX(-50px);
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
