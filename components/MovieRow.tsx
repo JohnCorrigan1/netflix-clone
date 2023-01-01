@@ -13,7 +13,7 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[]}> = (props) => {
     setSliderPosition(`-translate-x-[${position.toString()}%]`)
     }
     else if(count === -1){
-      setSliderPosition(`translate-x-[105%]`)
+      setSliderPosition(`translate-x-[100%]`)
     }
     else if(count === 0){
       setSliderPosition(`translate-x-[0%]`)
