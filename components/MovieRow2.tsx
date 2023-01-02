@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import Image from "next/image";
 import FeaturedMovie from '../models/FeaturedMovie';
+import { motion } from "framer-motion";
 
 const MovieRow: React.FC<{ movies: FeaturedMovie[]}> = (props) => {
   const [count, setCount] = useState(-1);
@@ -22,13 +23,13 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[]}> = (props) => {
 
   const incrementHandler = () => {
     setCount(count + 1)
-    setPosition(position + 100)
+    setPosition(position - 100)
     console.log(count, position)
   }
 
   const decrementHandler = () => {
     if(count !== -1){
-    setPosition(position - 100)
+    setPosition(position + 100)
     setCount(count - 1)
     }
   }
@@ -45,11 +46,18 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[]}> = (props) => {
          
         />
       </div>
-      <div className={sliderPosition + " duration-1000 flex gap-1 justify-center pl-10 pr-10"}>
+      <motion.div className={" flex gap-1 justify-center pl-32 pr-10"}
+      animate={{
+        x: `${position}%`,
+        transition: { duration: 1 }
+      }}
+      initial={{
+        x: "-100%"
+      }}>
       { props.movies.map((movie, index) => {
           return <MovieCard movie={movie} key={index} />  
         })}
-        </div>
+        </motion.div>
    <div onClick={incrementHandler} className="absolute right-2 flex items-center cursor-pointer hover:bg-zinc-800 hover:bg-opacity-50 rounded-lg z-50">
         <Image
           src="/rightArrow.svg"

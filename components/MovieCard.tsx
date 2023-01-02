@@ -41,13 +41,13 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
       onMouseLeave={leaveHandler}
       onClick={modalHandler}
     >
+
       <Image
         src={props.movie.posterPath}
         height={200}
         width={250}
         alt={props.movie.title}
       />
-
       {isShown && (
         <div className=" absolute z-[1000] top-3 scale-125  w-[300px] bg-zinc-600 min-h-[350px] rounded-xl shadow-lg p-1 showInfo " >
           <Image

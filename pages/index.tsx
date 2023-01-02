@@ -8,6 +8,8 @@ import MovieModal from "../components/MovieModal";
 import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { MovieContext } from "../lib/MovieContext";
+import Slider from "../components/slider/Slider";
+import MovieRow2 from "../components/MovieRow2";
 
 const Home: NextPage = () => {
 
@@ -29,12 +31,13 @@ const Home: NextPage = () => {
         <div className="mb-10 mt-10">
         <MovieRow movies={moviesContext.movies} />       
         </div>
-        <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+        <Slider movies={moviesContext.movies} />
+         <div className="mb-10 mt-10">
+        <MovieRow2 movies={moviesContext.movies} />       
         </div>
-        <div className="mb-10 mt-10">
+        {/*<div className="mb-10 mt-10">
         <MovieRow movies={moviesContext.movies} />       
-        </div>
+        </div> */}
     </div>
   );
 };
