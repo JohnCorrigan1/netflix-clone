@@ -3,13 +3,11 @@ import Head from "next/head";
 import NavBar from "../components/NavBar";
 import Feature from "../components/Feature";
 import FeatureInfo from "../components/FeatureInfo";
-import MovieRow from "../components/MovieRow";
 import MovieModal from "../components/MovieModal";
 import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { MovieContext } from "../lib/MovieContext";
-import Slider from "../components/slider/Slider";
-import MovieRow2 from "../components/MovieRow2";
+import MovieRow from "../components/MovieRow";
 
 const Home: NextPage = () => {
 
@@ -31,13 +29,12 @@ const Home: NextPage = () => {
         <div className="mb-10 mt-10">
         <MovieRow movies={moviesContext.movies} />       
         </div>
-        <Slider movies={moviesContext.movies} />
          <div className="mb-10 mt-10">
-        <MovieRow2 movies={moviesContext.movies} />       
-        </div>
-        {/*<div className="mb-10 mt-10">
         <MovieRow movies={moviesContext.movies} />       
-        </div> */}
+        </div>
+        <div className="mb-10 mt-10">
+        <MovieRow movies={moviesContext.movies} />       
+        </div>
     </div>
   );
 };

@@ -2,17 +2,23 @@ import Image from "next/image";
 import FeaturedMovie from "../models/FeaturedMovie";
 import { useState, useContext, useEffect } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
+import { LibraryContext } from "../lib/FavoritesContext";
 
 const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
   const [isShown, setIsShown] = useState(false);
   const [timeoutId, setTimeoutId] = useState<any>(null)
 
   const currentContext = useContext(CurrentContext);
+  const libraryContext = useContext(LibraryContext);
 
   const modalHandler = () => {
     currentContext.setIsModalOpen(currentContext.isOpen);
     currentContext.setCurrent(props.movie);
   };
+
+  const addLibraryHandler = () => {
+    libraryContext.addLibraryHandler(props.movie!);
+  }
 
   useEffect(() => {
     return () => {
@@ -43,6 +49,7 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
     >
 
       <Image
+      className="rounded-lg"
         src={props.movie.posterPath}
         height={200}
         width={250}
@@ -58,6 +65,10 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
         alt={props.movie.title}
       /> 
       <p className="text-zinc-100 p-5 text-xs">{props.movie.overview}</p>
+      <div onClick={addLibraryHandler} className="hover:cursor-pointer active:scale-90 p-1 bg-zinc-800 rounded-2xl flex items-centers pr-2 font-semibolds">
+        <Image className="" src="/add.svg" height={20} width={20} alt="add"/>
+        <p>Add to Library</p>
+        </div>
       
       </div>)}
     </div>
