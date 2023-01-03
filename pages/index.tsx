@@ -27,13 +27,14 @@ const Home: NextPage = () => {
         </div>
         <MovieModal open={currentContext.isOpen} movie={currentContext.movie} />
         <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+        <MovieRow movies={moviesContext.movies} query={"3/trending/all/week"} />       
         </div>
          <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+        <MovieRow movies={moviesContext.movies} query={"3/trending/all/week"}/>       
         </div>
         <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+          {/* /discover/movie?with_genres=35 */}
+        <MovieRow movies={moviesContext.movies} query={"3/trending/all/week"}/>       
         </div>
     </div>
   );
