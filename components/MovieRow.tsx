@@ -6,20 +6,24 @@ import { motion } from "framer-motion";
 
 const MovieRow: React.FC<{ movies: FeaturedMovie[], query: string }> = (props) => {
 
-  const moviesNew: FeaturedMovie[] = [];
+  // const moviesNew: FeaturedMovie[] = [];
+  const [moviesNew, setMoviesNew] = useState<FeaturedMovie[]>([]);
+  const moviess: FeaturedMovie[] = [];
+
   
   useEffect(() => {
     getTrending();
+    console.log("new movies", moviesNew)
   }, []);
 
   const getTrending = async () => {
     const data = await fetch(
-      `https://api.themoviedb.org/${props.query}?api_key=f9e8c6b0f08e00ab858099b6fe804ea3`
+      props.query
     );
 
     const movies = await data.json();
        movies.results.forEach((movie: any) => {
-      moviesNew.push(
+      moviess.push(
         new FeaturedMovie(
           movie.id,
           movie.title,
@@ -32,6 +36,7 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[], query: string }> = (props) =
         )
       );
     });
+    setMoviesNew(moviess);
   };
 
 
