@@ -40,6 +40,7 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
   }
 
   return (
+    
     <div
       className=" duration-1000 hover:bg-opacity-50 min-w-[16%] rounded-lg max-w-sm "
 
@@ -56,7 +57,7 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
         alt={props.movie.title}
       />
       {isShown && (
-        <div className=" absolute z-[1000] top-3 scale-125  w-[300px] bg-zinc-600 min-h-[350px] rounded-xl shadow-lg p-1 showInfo " >
+        <div className=" absolute z-[1000] top-3 scale-125  w-[300px] bg-zinc-600 min-h-[350px] rounded-xl shadow-lg p-1 showInfo" >
           <Image
           className="rounded-xl"
         src={props.movie.backdropPath}
@@ -65,11 +66,6 @@ const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
         alt={props.movie.title}
       /> 
       <p className="text-zinc-100 p-5 text-xs">{props.movie.overview}</p>
-      <div onClick={addLibraryHandler} className="hover:cursor-pointer active:scale-90 p-1 bg-zinc-800 rounded-2xl flex items-centers pr-2 font-semibolds">
-        <Image className="" src="/add.svg" height={20} width={20} alt="add"/>
-        <p>Add to Library</p>
-        </div>
-      
       </div>)}
     </div>
   );
