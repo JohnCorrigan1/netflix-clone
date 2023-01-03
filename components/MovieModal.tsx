@@ -31,15 +31,13 @@ return (
       <Image src="/close.svg" height={40} width={40} alt="X" />
       
       </div>
-
-      {/* <h1 className='text-2xl font-bold mt-5 flex'>{props.movie?.title}</h1> */}
       <div className="w-full rounded-xl">
         <Image src={props.movie!.backdropPath} height={800} width={800} alt={props.movie!.title}/>
       </div>
-      <div className="flex w-full mt-1 ml-5">
+      <div className="flex w-full mt-1 ml-5 gap-5">
       {releaseYear && <h2 className=" ml-16 font-semibold text-lg">{releaseYear}</h2>}
         {props.movie?.mediaType && <h2 className=" ml-16 font-semibold text-lg">{props.movie?.mediaType}</h2>}
-        <div onClick={addLibraryHandler} className="hover:cursor-pointer active:scale-90 p-1 bg-zinc-800 rounded-2xl flex items-centers pr-2 font-semibolds">
+        <div onClick={addLibraryHandler} className="hover:cursor-pointer active:scale-90 p-1 bg-zinc-800 rounded-2xl flex items-centers pr-2 font-semibold hover:bg-zinc-500">
         <Image className="" src="/add.svg" height={20} width={20} alt="add"/>
         <p>Add to Library</p>
         </div>

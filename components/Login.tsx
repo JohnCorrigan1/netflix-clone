@@ -60,12 +60,12 @@ const Login: React.FC = () => {
             <input type="password" id="password" onChange={passwordChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
             </div>
             <div className=" mt-10">
-              <Link href="/"><button type="submit" className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button></Link>
+              <Link href="/accounts"><button type="submit" className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button></Link>
             </div>
         </form>
 
       <div className="mt-5">
-      <Link href="/"><button
+      <Link href="/accounts"><button
         className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center shadow-sm border w-full text-black justify-center active:scale-95"
         onClick={signInWithGoogle}
       >
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
       </button></Link>
       </div>
       <div className="mt-5 w-full">
-      <Link href="/"><button
+      <Link href="/accounts"><button
         className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center justify-center shadow-sm border text-black w-full active:scale-95"
         onClick={signInAnonymouslyHandler}
       >
