@@ -27,13 +27,14 @@ const Home: NextPage = () => {
         </div>
         <MovieModal open={currentContext.isOpen} movie={currentContext.movie} />
         <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+        <MovieRow movies={moviesContext.movies} query="https://api.themoviedb.org/3/trending/all/week?api_key=f9e8c6b0f08e00ab858099b6fe804ea3" />       
         </div>
          <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+        <MovieRow movies={moviesContext.movies} query="https://api.themoviedb.org/3/trending/all/week?api_key=f9e8c6b0f08e00ab858099b6fe804ea3"/>       
         </div>
         <div className="mb-10 mt-10">
-        <MovieRow movies={moviesContext.movies} />       
+          {/* /discover/movie?with_genres=35 */}
+        <MovieRow movies={moviesContext.movies} query="https://api.themoviedb.org/3/discover/movie?api_key=f9e8c6b0f08e00ab858099b6fe804ea3&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=Comedy&with_watch_monetization_types=flatrate" />       
         </div>
     </div>
   );

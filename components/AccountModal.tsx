@@ -3,25 +3,36 @@ import Image from "next/image"
 
 const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: Dispatch<SetStateAction<boolean>> }> = (props) => {
 
-    const closeHandler = () => {
-        props.setIsOpen(false)
-    }
+  const closeHandler = () => {
+    props.setIsOpen(false)
+  }
 
-if(!props.isOpen)
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log("submitted")
+  }
+
+  if (!props.isOpen)
     return null
 
-return (
+  return (
     <>
-    <div onClick={closeHandler} className='modal bg-black bg-opacity-70 fixed top-0 right-0 bottom-0 left-0 z-[2000]' ></div>
-      <div className='bg-zinc-900 text-zinc-200 flex flex-col items-center rounded-xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 max-w-3xl overflow-y-scroll scrollbar-hide h-5/6 z-[2001]'>
-      <div className="hover:bg-zinc-400 rounded-full bg-opacity-50 active:scale-95 absolute top-3 right-3"
-      onClick={closeHandler}
-      >
-      <Image src="/close.svg" height={40} width={40} alt="X" />
-      
+      <div onClick={closeHandler} className='modal bg-black bg-opacity-70 fixed top-0 right-0 bottom-0 left-0 z-[2000]' ></div>
+      <div className='bg-zinc-900 text-zinc-200 flex flex-col items-center rounded-xl fixed top-1/2 left-1/2 -translate-x-1/2 justify-center -translate-y-1/2 w-5/6 max-w-3xl overflow-y-scroll scrollbar-hide h-2/6 z-[2001]'>
+        <div className="hover:bg-zinc-400 rounded-full bg-opacity-50 active:scale-95 absolute top-3 right-3"
+          onClick={closeHandler}
+        >
+          <Image src="/close.svg" height={40} width={40} alt="X" />
+        </div>
+        <form onSubmit={submitHandler}>
+          <div className="flex flex-col gap-5">
+            <label htmlFor="username">Username</label>
+            <input type="text" name="username" id="username" className="bg-zinc-800 text-zinc-200 rounded-lg p-2" />
+        </div>
+        <button className="bg-zinc-500 hover:bg-zinc-400 active:scale-95 rounded-lg p-2 mt-5" type="submit">Submit</button>
+        </form>
       </div>
-    </div>
-  </> )
+    </>)
 }
 
 export default AccountModal
