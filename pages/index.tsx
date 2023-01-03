@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       </Head>
       <NavBar />
         <div className="">
-          <FeatureInfo />
+          {/* <FeatureInfo /> */}
           <Feature />
         </div>
         <MovieModal open={currentContext.isOpen} movie={currentContext.movie} />
