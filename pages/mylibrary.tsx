@@ -20,8 +20,8 @@ const MyLibrary: NextPage = () => {
             <h1 className="text-zinc-200 mt-20 text-3xl w-full flex justify-center">My Library</h1>
         </div>
 
-      <MovieRow movies={movies.library} />
-      <MovieRow movies={movies.library} />
+      <MovieRow movies={movies.library} query="" />
+      <MovieRow movies={movies.library} query="" />
 
       </div>
     );
