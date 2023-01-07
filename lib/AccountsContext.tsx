@@ -5,22 +5,20 @@ import Account from "../models/Account";
 
 type AccountContextType = {
   accounts: Account[]
-    removeMovie: (movie: FeaturedMovie) => void;
-    addMovie: (movie: FeaturedMovie) => void;
     setAccount: (account: Account) => void;
     addAccount: (username: string) => void;
     setAccounts: (accounts: Account[]) => void;
+    currentAccount: Account | null;
+    setCurrentAccount: (account: Account) => void;
 };
 
 export const AccountContext = createContext<AccountContextType>({
     accounts: [],
-    removeMovie: (movie: FeaturedMovie) => {},
-    addMovie: (movie: FeaturedMovie) => {},
     setAccount: (account: Account) => {},
     addAccount: (username: string) => {},
-    setAccounts: (accounts: Account[]) => {}
-
-    
+    setAccounts: (accounts: Account[]) => {},
+    currentAccount: null,
+    setCurrentAccount: (account: Account) => {}    
 });
 
 type Props = {
@@ -29,29 +27,33 @@ type Props = {
 
 const AccountContextProvider: React.FC<Props> = (props) => {
   const [library, setLibrary] = useState<FeaturedMovie[]>([]);
-  const [currentAccount, setCurrentAccount] = useState<Account | null>(null);
+  const [currentAccountState, setCurrentAccountState] = useState<Account | null>(null);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const contextValue: AccountContextType = {
     accounts: accounts,
-    removeMovie: (movie: FeaturedMovie) => {
-        setLibrary(library.filter((m) => m.id !== movie.id));
-    },
-    addMovie: (movie: FeaturedMovie) => {
-        setLibrary([...library, movie]);
-    },
     setAccount: (account: Account) => {
-        setCurrentAccount(account)
-        setLibrary(account.library);
+        // setCurrentAccount(account)
+        // setLibrary(account.library);
     },
     addAccount: (username: string) => {
         const newAccount: Account = {
             username: username,
-            library: []
+            library: [],
+            addMovie: (movie: FeaturedMovie) => {
+                newAccount.library.push(movie)
+            },
+            removeMovie: (movie: FeaturedMovie) => {
+                newAccount.library = newAccount.library.filter((m) => m.id !== movie.id)
+            }
         }
         setAccounts([...accounts, newAccount])
     },
     setAccounts: (accounts: Account[]) => {
         setAccounts(accounts)
+    },
+    currentAccount: currentAccountState,
+    setCurrentAccount: (account: Account) => {
+        setCurrentAccountState(account)
     }
   };
 

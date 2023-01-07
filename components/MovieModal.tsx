@@ -3,11 +3,14 @@ import FeaturedMovie from "../models/FeaturedMovie";
 import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { LibraryContext } from '../lib/FavoritesContext';
+import { AccountContext } from '../lib/AccountsContext';
 
 const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (props) => {
 
   const currentContext = useContext(CurrentContext);
   const libraryContext = useContext(LibraryContext);
+  const accountContext = useContext(AccountContext);
+
 
   const closeHandler = () => {
     currentContext.setIsModalOpen(currentContext.isOpen);
@@ -17,6 +20,8 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
 
   const addLibraryHandler = () => {
     libraryContext.addLibraryHandler(props.movie!);
+    accountContext.currentAccount?.addMovie(props.movie!);
+    console.log(accountContext.currentAccount)
   }
 
 if (!props.open) return null
