@@ -4,17 +4,21 @@ import Account from "../models/Account";
 
 
 type AccountContextType = {
-  account: Account[]
+  accounts: Account[]
     removeMovie: (movie: FeaturedMovie) => void;
     addMovie: (movie: FeaturedMovie) => void;
     setAccount: (account: Account) => void;
+    addAccount: (username: string) => void;
+    setAccounts: (accounts: Account[]) => void;
 };
 
 export const AccountContext = createContext<AccountContextType>({
-    account: [],
+    accounts: [],
     removeMovie: (movie: FeaturedMovie) => {},
     addMovie: (movie: FeaturedMovie) => {},
     setAccount: (account: Account) => {},
+    addAccount: (username: string) => {},
+    setAccounts: (accounts: Account[]) => {}
 
     
 });
@@ -26,8 +30,9 @@ type Props = {
 const AccountContextProvider: React.FC<Props> = (props) => {
   const [library, setLibrary] = useState<FeaturedMovie[]>([]);
   const [currentAccount, setCurrentAccount] = useState<Account | null>(null);
+  const [accounts, setAccounts] = useState<Account[]>([]);
   const contextValue: AccountContextType = {
-    account: [],
+    accounts: accounts,
     removeMovie: (movie: FeaturedMovie) => {
         setLibrary(library.filter((m) => m.id !== movie.id));
     },
@@ -38,6 +43,16 @@ const AccountContextProvider: React.FC<Props> = (props) => {
         setCurrentAccount(account)
         setLibrary(account.library);
     },
+    addAccount: (username: string) => {
+        const newAccount: Account = {
+            username: username,
+            library: []
+        }
+        setAccounts([...accounts, newAccount])
+    },
+    setAccounts: (accounts: Account[]) => {
+        setAccounts(accounts)
+    }
   };
 
   return (

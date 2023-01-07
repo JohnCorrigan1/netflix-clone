@@ -1,14 +1,14 @@
 import FeaturedMovie from "./FeaturedMovie";
 
 export default class Account {
-    name: string;
+    username: string;
     library: FeaturedMovie[];
   
     constructor(
-     name: string,
+     username: string,
         library: FeaturedMovie[]
     ) {
-        this.name = name;
+        this.username = username;
         this.library = library;
     }
   }

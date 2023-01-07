@@ -3,13 +3,15 @@ import Head from 'next/head'
 import Account from '../components/Account'
 import NewAccount from '../components/NewAccount'
 import NavBar from '../components/NavBar'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import AccountModal from '../components/AccountModal'
+import { AccountContext } from "../lib/AccountsContext"
 
 const Accounts: NextPage = () => {
 
     const [isOpen, setIsOpen  ] = useState(false)
-
+    const accountContext = useContext(AccountContext)
+    
     return (
         <>
         <Head>
@@ -21,6 +23,10 @@ const Accounts: NextPage = () => {
         <AccountModal isOpen={isOpen} currentUser={"hugh"} setIsOpen={setIsOpen} />
         <div className='flex gap-10 w-full justify-center items-center login'>
             <Account name="user" />
+            { accountContext.accounts.map((account, index) => {
+                return <Account key={index} name={account.username} />
+            })
+            }
             <NewAccount isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
         </>
