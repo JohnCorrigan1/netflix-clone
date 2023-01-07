@@ -15,7 +15,15 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[], query: string }> = (props) =
   
   useEffect(() => {
     console.log("in library", accountContext.currentAccount?.library)
+    if(props.query !== ""){
     getTrending();
+    }
+    else if(accountContext.currentAccount?.library !== undefined){
+      setMoviesNew(accountContext.currentAccount!.library)
+    }
+    else {
+      setMoviesNew([])
+    }
     console.log("new movies", moviesNew)
   }, []);
 
@@ -74,12 +82,16 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[], query: string }> = (props) =
       }}
       >
     
-      {props.query !== "" ? moviesNew.map((movie, index) => {
+      {/* {props.query !== "" ? moviesNew.map((movie, index) => {
           return <MovieCard movie={movie} key={index} />  
         }) : accountContext.currentAccount?.library.map((movie, index) => {
           return <MovieCard movie={movie} key={index} />  
         })
-        } 
+        }  */}
+        {moviesNew.map((movie, index) => {
+          return <MovieCard movie={movie} key={index} />  
+        })
+        }
         </motion.div> }
         
    <div onClick={incrementHandler} className="absolute right-2 flex items-center cursor-pointer hover:bg-zinc-800 hover:bg-opacity-50 rounded-lg z-50">
