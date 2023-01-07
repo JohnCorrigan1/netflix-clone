@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 
 const Login: React.FC = () => {
 
+    const { user } = useContext(UserContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -38,6 +40,7 @@ const Login: React.FC = () => {
     const signInWithGoogle = async () => {
       await signInWithPopup(auth, googleProvider);
       toast.success("Signed in with Google");
+      console.log(user)
     };
 
     const signInAnonymouslyHandler = async () => {
@@ -68,6 +71,7 @@ const Login: React.FC = () => {
       <Link href="/accounts"><button
         className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center shadow-sm border w-full text-black justify-center active:scale-95"
         onClick={signInWithGoogle}
+        
       >
         <Image src="/google.png" alt="Google sign in" width={30} height={30} />{" "}
         Sign in with Google

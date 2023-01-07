@@ -1,9 +1,11 @@
 import Image from 'next/image'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
+import { UserContext } from '../lib/AuthContext';
 
 const NewAccount: React.FC<{ isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }> = (props) => {
-
+    const { user } = useContext(UserContext);
     const modalHandler = () => {
+        console.log(user)
         props.setIsOpen(true)
     }
 
