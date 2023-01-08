@@ -4,13 +4,16 @@ import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { LibraryContext } from '../lib/FavoritesContext';
 import { AccountContext } from '../lib/AccountsContext';
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import { UserContext } from "../lib/AuthContext";
 
 const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (props) => {
 
   const currentContext = useContext(CurrentContext);
   const libraryContext = useContext(LibraryContext);
   const accountContext = useContext(AccountContext);
-
+  const { user } = useContext(UserContext)
 
   const closeHandler = () => {
     currentContext.setIsModalOpen(currentContext.isOpen);
@@ -22,7 +25,37 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
     libraryContext.addLibraryHandler(props.movie!);
     accountContext.currentAccount?.addMovie(props.movie!);
     console.log(accountContext.currentAccount)
+    addMovie()
   }
+
+  //add movie to library array in firestore under the current users accounts collection by account username field
+  const addMovie = async () => {
+    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const item = doc.data();
+      console.log(item)
+      if(item.uid === user?.uid){
+        console.log("found")
+        try {
+          const docRef = addDoc(collection(db, "users", doc.id, "accounts", accountContext.currentAccount!.username, "library"), {
+            title: props.movie!.title,
+            backdropPath: props.movie!.backdropPath,
+            id: props.movie!.id,
+            overview: props.movie!.overview,
+            posterPath: props.movie!.posterPath,
+            releaseDate: props.movie!.releaseDate,
+            voteAverage: props.movie!.voteAverage,
+            mediaType: props.movie!.mediaType
+          });
+          console.log("Document written with ID: ");
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
+    });
+  }
+
 
 if (!props.open) return null
 

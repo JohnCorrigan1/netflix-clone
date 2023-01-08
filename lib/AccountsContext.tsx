@@ -13,7 +13,7 @@ type AccountContextType = {
 };
 
 export const AccountContext = createContext<AccountContextType>({
-    accounts: [],
+    accounts: [{username: "user", library: [], addMovie: (movie: FeaturedMovie) => {}, removeMovie: (movie: FeaturedMovie) => {}}],
     setAccount: (account: Account) => {},
     addAccount: (username: string) => {},
     setAccounts: (accounts: Account[]) => {},
