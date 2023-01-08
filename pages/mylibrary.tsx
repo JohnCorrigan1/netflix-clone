@@ -24,7 +24,7 @@ const MyLibrary: NextPage = () => {
         </div>
 
       {
-        accountContext.currentAccount!.library.length < 1 ? (<h1 className="text-zinc-200 mt-20 text-3xl w-full flex justify-center">No movies in your library</h1>) : ( 
+        accountContext.currentAccount?.library  ? (<h1 className="text-zinc-200 mt-20 text-3xl w-full flex justify-center">No movies in your library</h1>) : ( 
       <>
       <MovieRow movies={movies.library} query="" />
       <MovieRow movies={movies.library} query="" />
