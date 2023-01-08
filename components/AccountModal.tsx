@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useContext, useState } from "react"
 import { UserContext } from "../lib/AuthContext"
 import { AccountContext } from "../lib/AccountsContext"
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
+import { addDoc, collection, getDocs, query, setDoc, where, doc } from "firebase/firestore"
 import { db } from "../lib/firebase"
 import toast from "react-hot-toast"
 
@@ -34,13 +34,15 @@ const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: 
   const addAccount = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const item = doc.data();
+    querySnapshot.forEach((document) => {
+      const item = document.data();
       console.log(item)
       if(item.uid === user?.uid){
         console.log("found")
+        // use setDoc instead
         try {
-          const docRef = addDoc(collection(db, "users", doc.id, "accounts"), {
+          const docRef = setDoc(doc(db, "users", document.id, "accounts", username), {
+            id: username,
             username: username,
             uid: user?.uid,
             library: []
@@ -48,10 +50,27 @@ const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: 
           toast.success("Account added");
         } catch (e) {
           toast.error("Error adding document");
+          console.log("error here", e)
         }
       }
     });
   }
+
+      //   try {
+      //     const docRef = addDoc(collection(db, "users", doc.id, "accounts") {
+      //       id: username,
+      //       username: username,
+      //       uid: user?.uid,
+      //       library: []
+      //     });
+      //     toast.success("Account added");
+      //   } catch (e) {
+      //     toast.error("Error adding document");
+      //     console.log("error here", e)
+      //   }
+      // }
+    // });
+  // }
 
   //create empty library collection for the account
   // const createLibrary = async () => {
