@@ -25,77 +25,33 @@ const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     accountContext.addAccount(username)
-    console.log("submitted")
     addAccount()
+    props.setIsOpen(false)
     // createLibrary()
   }
   
   //add account collection to user document of the current user in firestore
   const addAccount = async () => {
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((document) => {
-      const item = document.data();
-      console.log(item)
-      if(item.uid === user?.uid){
-        console.log("found")
+    // const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((document) => {
+    //   const item = document.data();
+      // if(item.uid === user?.uid){
         // use setDoc instead
         try {
-          const docRef = setDoc(doc(db, "users", document.id, "accounts", username), {
+          const docRef = setDoc(doc(db, "users", user!.uid, "accounts", username), {
             id: username,
             username: username,
             uid: user?.uid,
-            library: []
+            // library: []
           });
           toast.success("Account added");
         } catch (e) {
           toast.error("Error adding document");
-          console.log("error here", e)
         }
       }
-    });
-  }
-
-      //   try {
-      //     const docRef = addDoc(collection(db, "users", doc.id, "accounts") {
-      //       id: username,
-      //       username: username,
-      //       uid: user?.uid,
-      //       library: []
-      //     });
-      //     toast.success("Account added");
-      //   } catch (e) {
-      //     toast.error("Error adding document");
-      //     console.log("error here", e)
-      //   }
-      // }
     // });
   // }
-
-  //create empty library collection for the account
-  // const createLibrary = async () => {
-  //   const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     const item = doc.data();
-  //     console.log(item)
-  //     if(item.uid === user?.uid){
-  //       console.log("found")
-  //       try {
-  //         const docRef = addDoc(collection(db, "users", doc.id, "accounts", "library"), {
-  //           uid: user?.uid,
-  //           library: []
-  //         });
-  //         toast.success("Library created");
-  //       } catch (e) {
-  //         toast.error("Error creating library");
-        
-  //         console.log("library", e)
-  //       }
-  //     }
-  //   });
-  // }
-
 
 
   if (!props.isOpen)

@@ -30,8 +30,8 @@ const Login: React.FC = () => {
             const errorMessage = error.message;
             toast.error("Error: " + errorMessage, errorCode);
           });
-          if(user)
-          addUser(email, user)
+          // if(user)
+          // addUser(email, user)
     }
 
     const addUser = async (email: string, user: User) => {

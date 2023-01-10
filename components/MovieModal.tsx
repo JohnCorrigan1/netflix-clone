@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { LibraryContext } from '../lib/FavoritesContext';
 import { AccountContext } from '../lib/AccountsContext';
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { UserContext } from "../lib/AuthContext";
 
@@ -30,15 +30,16 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
 
   //add movie to library array in firestore under the current users accounts collection by account username field
   const addMovie = async () => {
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const item = doc.data();
-      console.log(item)
-      if(item.uid === user?.uid){
+    // const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+      // const item = doc.data();
+      // console.log(item)
+      // if(item.uid === user?.uid){
         console.log("found")
         try {
-          const docRef = addDoc(collection(db, "users", doc.id, "accounts", accountContext.currentAccount!.username, "library"), {
+          // const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library")
+          const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library", props.movie!.title), {
             title: props.movie!.title,
             backdropPath: props.movie!.backdropPath,
             id: props.movie!.id,
@@ -46,15 +47,15 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
             posterPath: props.movie!.posterPath,
             releaseDate: props.movie!.releaseDate,
             voteAverage: props.movie!.voteAverage,
-            mediaType: props.movie!.mediaType
+            // mediaType: props.movie?.mediaType
           });
           console.log("Document written with ID: ");
         } catch (e) {
           console.error("Error adding document: ", e);
         }
       }
-    });
-  }
+    // });
+  // }
 
 
 if (!props.open) return null

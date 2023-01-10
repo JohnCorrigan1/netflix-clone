@@ -21,7 +21,7 @@ const CreateAccount: React.FC = () => {
         // Signed in
         const user = userCredential.user;
         // ...
-        addUser(email)
+        // addUser(email)
         toast.success("Signed in with email and password");
       })
       .catch((error) => {
@@ -34,23 +34,23 @@ const CreateAccount: React.FC = () => {
   };
 
   //add user to firestore with add user function
-  const addUser = async (email: string) => {
-    // if (!user) {
-    //   return;
-    // }
+  // const addUser = async (email: string) => {
+  //   // if (!user) {
+  //   //   return;
+  //   // }
 
-    //add a collection to collection in firestore
+  //   //add a collection to collection in firestore
 
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-        email: email,
-        uid: user?.uid,
-      });
-      toast.success("Account added");
-    } catch (e) {
-      toast.error("Error adding document");
-    }
-  };
+  //   try {
+  //     const docRef = await addDoc(collection(db, "users"), {
+  //       email: email,
+  //       uid: user?.uid,
+  //     });
+  //     toast.success("Account added");
+  //   } catch (e) {
+  //     toast.error("Error adding document");
+  //   }
+  // };
   
 
   const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
