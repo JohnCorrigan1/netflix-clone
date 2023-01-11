@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext } from "react";
-import { signInWithPopup, signInAnonymously, signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import React, { useState, useContext } from "react";
+import { signInWithPopup, signInAnonymously, signInWithEmailAndPassword, getAuth, User } from "firebase/auth";
 import { UserContext } from "../lib/AuthContext";
-import { auth, googleProvider } from "../lib/firebase";
+import { auth, db, googleProvider } from "../lib/firebase";
 import toast from 'react-hot-toast';
+import { addDoc, collection } from "firebase/firestore";
 
 
 const Login: React.FC = () => {
@@ -14,12 +15,14 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const submitHandler = async () => {
+        // e.preventDefault();
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
+            
+            console.log("helllooooo")
             toast.success("Signed in with email and password");
           })
           .catch((error) => {
@@ -27,7 +30,41 @@ const Login: React.FC = () => {
             const errorMessage = error.message;
             toast.error("Error: " + errorMessage, errorCode);
           });
+          // if(user)
+          // addUser(email, user)
     }
+
+    const addUser = async (email: string, user: User) => {
+      // if (!user) {
+      //   return;
+      // }
+  
+      //add a collection to collection in firestore
+  
+      try {
+        const docRef = await addDoc(collection(db, "users"), {
+          email: email,
+          uid: user?.uid,
+
+        });
+        toast.success("Account added");
+      } catch (e) {
+        toast.error("Error adding document");
+        console.log(e)
+      }
+      // createLibrary(user)
+    };
+
+    // const createLibrary = async (user: User) => {
+    //   try {
+    //     db.collection("users").doc(
+    //       "DSd4rzLGTCWv1uGBqBdl").collection("library").doc("library").set({
+    //       library: []
+    //     })
+    //   } catch (e) {
+    //     console.log(e)
+    //   }
+    // }
 
     const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -63,7 +100,7 @@ const Login: React.FC = () => {
             <input type="password" id="password" onChange={passwordChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
             </div>
             <div className=" mt-10">
-              <Link href="/accounts"><button type="submit" className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button></Link>
+              <Link href="/accounts"><button  onClick={submitHandler} className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button></Link>
             </div>
         </form>
 

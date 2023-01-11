@@ -1,10 +1,11 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAdditionalUserInfo, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 
 const CreateAccount: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -15,19 +16,42 @@ const CreateAccount: React.FC = () => {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const auth = getAuth();
-    await signInWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
+        // addUser(email)
         toast.success("Signed in with email and password");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         toast.error("Error: " + errorMessage, errorCode);
+        console.log("error123", errorCode, errorMessage)
       });
+      
   };
+
+  //add user to firestore with add user function
+  // const addUser = async (email: string) => {
+  //   // if (!user) {
+  //   //   return;
+  //   // }
+
+  //   //add a collection to collection in firestore
+
+  //   try {
+  //     const docRef = await addDoc(collection(db, "users"), {
+  //       email: email,
+  //       uid: user?.uid,
+  //     });
+  //     toast.success("Account added");
+  //   } catch (e) {
+  //     toast.error("Error adding document");
+  //   }
+  // };
+  
 
   const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -84,7 +108,7 @@ const CreateAccount: React.FC = () => {
             type="submit"
             className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full"
           >
-            Sign in
+            Sign up
           </button>
         </div>
       </form>

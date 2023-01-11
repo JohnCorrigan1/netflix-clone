@@ -3,6 +3,9 @@ import Image from "next/image"
 import { useContext, useState } from "react"
 import { UserContext } from "../lib/AuthContext"
 import { AccountContext } from "../lib/AccountsContext"
+import { addDoc, collection, getDocs, query, setDoc, where, doc } from "firebase/firestore"
+import { db } from "../lib/firebase"
+import toast from "react-hot-toast"
 
 
 const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: Dispatch<SetStateAction<boolean>> }> = (props) => {
@@ -22,8 +25,34 @@ const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     accountContext.addAccount(username)
-    console.log("submitted")
+    addAccount()
+    props.setIsOpen(false)
+    // createLibrary()
   }
+  
+  //add account collection to user document of the current user in firestore
+  const addAccount = async () => {
+    // const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((document) => {
+    //   const item = document.data();
+      // if(item.uid === user?.uid){
+        // use setDoc instead
+        try {
+          const docRef = setDoc(doc(db, "users", user!.uid, "accounts", username), {
+            id: username,
+            username: username,
+            uid: user?.uid,
+            // library: []
+          });
+          toast.success("Account added");
+        } catch (e) {
+          toast.error("Error adding document");
+        }
+      }
+    // });
+  // }
+
 
   if (!props.isOpen)
     return null

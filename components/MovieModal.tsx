@@ -4,13 +4,17 @@ import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { LibraryContext } from '../lib/FavoritesContext';
 import { AccountContext } from '../lib/AccountsContext';
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import { UserContext } from "../lib/AuthContext";
+import toast from "react-hot-toast";
 
 const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (props) => {
 
   const currentContext = useContext(CurrentContext);
   const libraryContext = useContext(LibraryContext);
   const accountContext = useContext(AccountContext);
-
+  const { user } = useContext(UserContext)
 
   const closeHandler = () => {
     currentContext.setIsModalOpen(currentContext.isOpen);
@@ -22,7 +26,31 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
     libraryContext.addLibraryHandler(props.movie!);
     accountContext.currentAccount?.addMovie(props.movie!);
     console.log(accountContext.currentAccount)
+    addMovie()
   }
+
+  //add movie to library array in firestore under the current users accounts collection by account username field
+  const addMovie = async () => {
+        try {
+          // const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library")
+          const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library", props.movie!.title), {
+            title: props.movie!.title,
+            backdropPath: props.movie!.backdropPath,
+            id: props.movie!.id,
+            overview: props.movie!.overview,
+            posterPath: props.movie!.posterPath,
+            releaseDate: props.movie!.releaseDate,
+            voteAverage: props.movie!.voteAverage,
+            // mediaType: props.movie?.mediaType
+          });
+          toast.success("Document written");
+        } catch (e) {
+          toast.error("Error adding document" + e);
+        }
+      }
+    // });
+  // }
+
 
 if (!props.open) return null
 
