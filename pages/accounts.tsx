@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar'
 import { useState, useContext, useEffect } from 'react'
 import AccountModal from '../components/AccountModal'
 import { AccountContext } from "../lib/AccountsContext"
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { collection, doc, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../lib/firebase'
 import { UserContext } from '../lib/AuthContext'
 
@@ -22,16 +22,23 @@ const Accounts: NextPage = () => {
     
     //   get accounts for current user from firestore
       const getAccounts = async () => {
-        const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((document) => {
-          const item = document.data();
-        //   if (item.uid === user?.uid) {
-        //     console.log("accounts ", item)
-        //   }
+        // const q = query(collection(db, "users", user?.uid, "accounts"), where("uid", "==", user?.uid));
+        // const querySnapshot = await getDocs(q);
+        // querySnapshot.forEach((document) => {
+        //   const item = document.data();
+        // //   if (item.uid === user?.uid) {
+        // //     console.log("accounts ", item)
+        // //   }
+        // // });
+        // console.log("item here", item)
         // });
-        console.log("item here", item)
+        // const docRef = collection(db, "users", user?.uid, "accounts");
+        const querySnapshot = await getDocs(collection(db, "users", user!.uid, "accounts"));
+        console.log(querySnapshot)
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
         });
+        // const docSnap = await getDocs(docRef);
     };
       
       
