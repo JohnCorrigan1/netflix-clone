@@ -7,6 +7,7 @@ import { AccountContext } from '../lib/AccountsContext';
 import { addDoc, collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { UserContext } from "../lib/AuthContext";
+import toast from "react-hot-toast";
 
 const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (props) => {
 
@@ -30,13 +31,6 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
 
   //add movie to library array in firestore under the current users accounts collection by account username field
   const addMovie = async () => {
-    // const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-    // const querySnapshot = await getDocs(q);
-    // querySnapshot.forEach((doc) => {
-      // const item = doc.data();
-      // console.log(item)
-      // if(item.uid === user?.uid){
-        console.log("found")
         try {
           // const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library")
           const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library", props.movie!.title), {
@@ -49,9 +43,9 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
             voteAverage: props.movie!.voteAverage,
             // mediaType: props.movie?.mediaType
           });
-          console.log("Document written with ID: ");
+          toast.success("Document written");
         } catch (e) {
-          console.error("Error adding document: ", e);
+          toast.error("Error adding document" + e);
         }
       }
     // });
