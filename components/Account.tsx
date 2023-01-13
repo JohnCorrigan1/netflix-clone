@@ -20,22 +20,9 @@ const Account: React.FC<{ name: string }> = (props) => {
   };
 
   useEffect(() => {
-    getAccounts()
+    // getAccounts()
   }, [])
-
-  // get accounts for current user from firestore
-  const getAccounts = async () => {
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((document) => {
-      const item = document.data();
-      if (item.uid === user?.uid) {
-        console.log("accounts ", item)
-      }
-    });
-  };
   
-
 
   return (
     <Link href="/">

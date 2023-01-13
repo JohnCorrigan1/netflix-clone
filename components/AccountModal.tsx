@@ -4,13 +4,15 @@ import { useContext, useState } from "react"
 import { UserContext } from "../lib/AuthContext"
 import { AccountContext } from "../lib/AccountsContext"
 import { addDoc, collection, getDocs, query, setDoc, where, doc } from "firebase/firestore"
-import { db } from "../lib/firebase"
+import { auth, db } from "../lib/firebase"
 import toast from "react-hot-toast"
+import { useAuthState } from "react-firebase-hooks/auth"
 
 
 const AccountModal: React.FC<{ isOpen: boolean, currentUser: string, setIsOpen: Dispatch<SetStateAction<boolean>> }> = (props) => {
 
-  const { user } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
+  const [user] = useAuthState(auth)
   const accountContext = useContext(AccountContext)
   const [username, setUsername] = useState("")
 
