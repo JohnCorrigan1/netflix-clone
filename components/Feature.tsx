@@ -55,7 +55,6 @@ const Feature: React.FC = () => {
     );
 
     const config = await data.json();
-    console.log(config);
   };
 
   return (

@@ -5,7 +5,6 @@ import { UserContext } from '../lib/AuthContext';
 const NewAccount: React.FC<{ isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }> = (props) => {
     const { user } = useContext(UserContext);
     const modalHandler = () => {
-        console.log(user)
         props.setIsOpen(true)
     }
 

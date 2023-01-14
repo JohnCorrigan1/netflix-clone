@@ -28,30 +28,9 @@ const CreateAccount: React.FC = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         toast.error("Error: " + errorMessage, errorCode);
-        console.log("error123", errorCode, errorMessage)
       });
       
   };
-
-  //add user to firestore with add user function
-  // const addUser = async (email: string) => {
-  //   // if (!user) {
-  //   //   return;
-  //   // }
-
-  //   //add a collection to collection in firestore
-
-  //   try {
-  //     const docRef = await addDoc(collection(db, "users"), {
-  //       email: email,
-  //       uid: user?.uid,
-  //     });
-  //     toast.success("Account added");
-  //   } catch (e) {
-  //     toast.error("Error adding document");
-  //   }
-  // };
-  
 
   const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);

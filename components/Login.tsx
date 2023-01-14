@@ -19,10 +19,7 @@ const Login: React.FC = () => {
         // e.preventDefault();
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            
-            console.log("helllooooo")
+          .then(() => {
             toast.success("Signed in with email and password");
           })
           .catch((error) => {
@@ -30,41 +27,7 @@ const Login: React.FC = () => {
             const errorMessage = error.message;
             toast.error("Error: " + errorMessage, errorCode);
           });
-          // if(user)
-          // addUser(email, user)
     }
-
-    const addUser = async (email: string, user: User) => {
-      // if (!user) {
-      //   return;
-      // }
-  
-      //add a collection to collection in firestore
-  
-      try {
-        const docRef = await addDoc(collection(db, "users"), {
-          email: email,
-          uid: user?.uid,
-
-        });
-        toast.success("Account added");
-      } catch (e) {
-        toast.error("Error adding document");
-        console.log(e)
-      }
-      // createLibrary(user)
-    };
-
-    // const createLibrary = async (user: User) => {
-    //   try {
-    //     db.collection("users").doc(
-    //       "DSd4rzLGTCWv1uGBqBdl").collection("library").doc("library").set({
-    //       library: []
-    //     })
-    //   } catch (e) {
-    //     console.log(e)
-    //   }
-    // }
 
     const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -77,7 +40,6 @@ const Login: React.FC = () => {
     const signInWithGoogle = async () => {
       await signInWithPopup(auth, googleProvider);
       toast.success("Signed in with Google");
-      console.log(user)
     };
 
     const signInAnonymouslyHandler = async () => {

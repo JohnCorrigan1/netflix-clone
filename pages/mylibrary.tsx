@@ -25,13 +25,9 @@ const MyLibrary: NextPage = () => {
     //get library from firestore of the current account
     const getLibrary = async () => {
         const querySnapshot = await getDocs(collection(db, "users", user!.uid, "accounts", accountContext.currentAccount, "library"));
-        console.log(querySnapshot)
         querySnapshot.forEach((doc) => {
-            console.log("library", doc.id, " => ", doc.data());
             setMovies((movies: any) => [...movies, doc.data()])
         });
-        console.log(movies)
-
     }
     
     return (

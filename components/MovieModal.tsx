@@ -24,8 +24,6 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
 
   const addLibraryHandler = () => {
     libraryContext.addLibraryHandler(props.movie!);
-    // accountContext.currentAccount?.addMovie(props.movie!);
-    console.log("account",accountContext.currentAccount)
     addMovie()
   }
 

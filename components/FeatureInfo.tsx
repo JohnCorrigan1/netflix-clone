@@ -15,7 +15,6 @@ const FeatureInfo: React.FC<{ movie: FeaturedMovie }> = (props) => {
   };
 
   const movies = movieContext.movies;
-  console.log(movies);
 
   return (
     <div className=" z-50 absolute text-rose-600 top-60 left-28 info flex flex-col gap-16 font-extrabold">

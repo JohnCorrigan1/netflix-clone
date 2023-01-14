@@ -7,24 +7,19 @@ import { AccountContext } from "../lib/AccountsContext";
 
 const MovieRow: React.FC<{ movies: FeaturedMovie[], query: string }> = (props) => {
 
-  // const moviesNew: FeaturedMovie[] = [];
   const [moviesNew, setMoviesNew] = useState<FeaturedMovie[]>([]);
   const moviess: FeaturedMovie[] = [];
-  const accountContext = useContext(AccountContext);
-
   
   useEffect(() => {
-    console.log("in library", accountContext.currentAccount?.library)
     if(props.query !== ""){
     getTrending();
     }
-    else if(accountContext.currentAccount?.library !== undefined){
-      setMoviesNew(accountContext.currentAccount!.library)
+    else if(props.movies.length > 0){
+      setMoviesNew(props.movies)
     }
     else {
       setMoviesNew([])
     }
-    console.log("new movies", moviesNew)
   }, []);
 
   const getTrending = async () => {
@@ -63,7 +58,7 @@ const MovieRow: React.FC<{ movies: FeaturedMovie[], query: string }> = (props) =
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-3xl font-bold">Trending</h1>
+      <h1 className="text-3xl font-bold mr-auto ml-[5%] mb-5 text-zinc-200">Trending</h1>
     <div className="flex gap-5 mr-10 w-full justify-center items-center z-0">
 
   <div  onClick={decrementHandler} className="absolute left-2 flex items-center cursor-pointer hover:bg-zinc-800 hover:bg-opacity-50 rounded-lg z-50">

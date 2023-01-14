@@ -25,19 +25,14 @@ const Accounts: NextPage = () => {
     useEffect(() => {
         if(user)
         getAccounts()
-        console.log("user",user)
-        console.log(accounts)
       }, [user])
     
     //   get accounts for current user from firestore
       const getAccounts = async () => {
         const querySnapshot = await getDocs(collection(db, "users", user!.uid, "accounts"));
-        console.log(querySnapshot)
         querySnapshot.forEach((doc) => {
-            console.log("accounts", doc.id, " => ", doc.data());
             setAccounts(accounts => [...accounts, doc.id])
         });
-        console.log(accounts)
     };
       
     return (

@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
   return (
     <div
       className={`flex z-50 justify-between items-center pt-2 pl-5 pr-5 pb-2 fixed w-full top-0 ${
-        scrolled ? "bg-gray-900 bg-opacity-80" : "bg-transparent"
+        scrolled ? "bg-gray-900 bg-opacity-80 duration-200" : "bg-transparent"
       }`}
     >
       <div className="flex gap-5 items-center">
