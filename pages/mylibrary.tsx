@@ -4,12 +4,35 @@ import NavBar from "../components/NavBar";
 import MovieCard from "../components/MovieCard";
 import MovieRow from "../components/MovieRow";
 import { LibraryContext } from '../lib/FavoritesContext';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../lib/AccountsContext";
+import { collection, getDocs } from "firebase/firestore";
+import { auth, db } from "../lib/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import FeaturedMovie from "../models/FeaturedMovie";
 
 const MyLibrary: NextPage = () => {
-    const movies = useContext(LibraryContext)
+    // const movies = useContext(LibraryContext)
+    const [movies, setMovies] = useState<any>([])
     const accountContext = useContext(AccountContext)
+    const [user] = useAuthState(auth)
+
+    useEffect(() => {
+        if(user)
+        getLibrary()
+    }, [user])
+
+    //get library from firestore of the current account
+    const getLibrary = async () => {
+        const querySnapshot = await getDocs(collection(db, "users", user!.uid, "accounts", accountContext.currentAccount, "library"));
+        console.log(querySnapshot)
+        querySnapshot.forEach((doc) => {
+            console.log("library", doc.id, " => ", doc.data());
+            setMovies((movies: any) => [...movies, doc.data()])
+        });
+        console.log(movies)
+
+    }
     
     return (
       <div className="library overflow-hidden over">
@@ -24,10 +47,10 @@ const MyLibrary: NextPage = () => {
         </div>
 
       {
-        !accountContext.currentAccount?.library  ? (<h1 className="text-zinc-200 mt-20 text-3xl w-full flex justify-center">No movies in your library</h1>) : ( 
+        movies.length  < 1 ? (<h1 className="text-zinc-200 mt-20 text-3xl w-full flex justify-center">No movies in your library</h1>) : ( 
       <>
-      <MovieRow movies={movies.library} query="" />
-      <MovieRow movies={movies.library} query="" />
+      <MovieRow movies={movies} query="" />
+      <MovieRow movies={movies} query="" />
       </>
     )}
       </div>

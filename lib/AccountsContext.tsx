@@ -8,8 +8,10 @@ type AccountContextType = {
     setAccount: (account: Account) => void;
     addAccount: (username: string) => void;
     setAccounts: (accounts: Account[]) => void;
-    currentAccount: Account | null;
-    setCurrentAccount: (account: Account) => void;
+    currentAccount: string;
+    setCurrentAccount: (username: string) => void;
+
+
 };
 
 export const AccountContext = createContext<AccountContextType>({
@@ -17,8 +19,8 @@ export const AccountContext = createContext<AccountContextType>({
     setAccount: (account: Account) => {},
     addAccount: (username: string) => {},
     setAccounts: (accounts: Account[]) => {},
-    currentAccount: null,
-    setCurrentAccount: (account: Account) => {}    
+    currentAccount: "",
+    setCurrentAccount: (username: string) => {}    
 });
 
 type Props = {
@@ -27,7 +29,8 @@ type Props = {
 
 const AccountContextProvider: React.FC<Props> = (props) => {
   const [library, setLibrary] = useState<FeaturedMovie[]>([]);
-  const [currentAccountState, setCurrentAccountState] = useState<Account | null>(null);
+  // const [currentAccountState, setCurrentAccountState] = useState<Account | null>(null);
+  const [currentAccountState, setCurrentAccountState] = useState<string>("");
   const [accounts, setAccounts] = useState<Account[]>([]);
   const contextValue: AccountContextType = {
     accounts: accounts,
@@ -52,8 +55,8 @@ const AccountContextProvider: React.FC<Props> = (props) => {
         setAccounts(accounts)
     },
     currentAccount: currentAccountState,
-    setCurrentAccount: (account: Account) => {
-        setCurrentAccountState(account)
+    setCurrentAccount: (username: string) => {
+        setCurrentAccountState(username)
     }
   };
 

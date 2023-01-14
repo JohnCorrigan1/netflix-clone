@@ -24,8 +24,8 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
 
   const addLibraryHandler = () => {
     libraryContext.addLibraryHandler(props.movie!);
-    accountContext.currentAccount?.addMovie(props.movie!);
-    console.log(accountContext.currentAccount)
+    // accountContext.currentAccount?.addMovie(props.movie!);
+    console.log("account",accountContext.currentAccount)
     addMovie()
   }
 
@@ -33,7 +33,7 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
   const addMovie = async () => {
         try {
           // const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library")
-          const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library", props.movie!.title), {
+          const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount, "library", props.movie!.title), {
             title: props.movie!.title,
             backdropPath: props.movie!.backdropPath,
             id: props.movie!.id,

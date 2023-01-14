@@ -12,11 +12,7 @@ const Account: React.FC<{ name: string }> = (props) => {
   const { user } = useContext(UserContext)
 
   const accountHandler = () => {
-    accountContext.accounts.forEach((account) => {
-      if (account.username === props.name) {
-        accountContext.setCurrentAccount(account);
-    }
-    });
+    accountContext.setCurrentAccount(props.name)
   };
 
   useEffect(() => {
