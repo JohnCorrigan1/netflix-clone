@@ -4,12 +4,28 @@ import NavBar from "../components/NavBar";
 import Feature from "../components/Feature";
 import FeatureInfo from "../components/FeatureInfo";
 import MovieModal from "../components/MovieModal";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { MovieContext } from "../lib/MovieContext";
 import MovieRow from "../components/MovieRow";
+import { useRouter } from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../lib/firebase";
 
 const Home: NextPage = () => {
+  
+  const [user] = useAuthState(auth);
+  const router = useRouter();
+
+  const handleRouteChange = (url: string) => {
+    if(url === "/" && !user) {
+      router.push("/signin")
+    }
+  }
+
+  useEffect(() => {
+    handleRouteChange(router.pathname)
+  }, [user])
 
   const currentContext = useContext(CurrentContext);
   const moviesContext = useContext(MovieContext);

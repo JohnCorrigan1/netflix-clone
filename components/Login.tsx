@@ -1,19 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { signInWithPopup, signInAnonymously, signInWithEmailAndPassword, getAuth, User } from "firebase/auth";
 import { UserContext } from "../lib/AuthContext";
 import { auth, db, googleProvider } from "../lib/firebase";
 import toast from 'react-hot-toast';
 import { addDoc, collection } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/router";
 
 
 const Login: React.FC = () => {
-
-    const { user } = useContext(UserContext);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [user] = useAuthState(auth);
+  const router = useRouter();
+
+  const handleRouteChange = (url: string) => {
+    if(user) {
+      router.push("/accounts")
+    }
+  }
+
+  useEffect(() => {
+    handleRouteChange(router.pathname)
+  }, [user])
 
     const submitHandler = async () => {
         // e.preventDefault();
@@ -67,14 +79,14 @@ const Login: React.FC = () => {
         </form>
 
       <div className="mt-5">
-      <Link href="/accounts"><button
+     <button
         className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center shadow-sm border w-full text-black justify-center active:scale-95"
         onClick={signInWithGoogle}
         
       >
         <Image src="/google.png" alt="Google sign in" width={30} height={30} />{" "}
         Sign in with Google
-      </button></Link>
+      </button>
       </div>
       <div className="mt-5 w-full">
       <Link href="/accounts"><button
