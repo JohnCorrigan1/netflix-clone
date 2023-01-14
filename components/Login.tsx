@@ -28,7 +28,6 @@ const Login: React.FC = () => {
   }, [user])
 
     const submitHandler = async () => {
-        // e.preventDefault();
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password)
           .then(() => {
@@ -74,7 +73,7 @@ const Login: React.FC = () => {
             <input type="password" id="password" onChange={passwordChangeHandler} className="rounded-md  p-2 bg-zinc-700" />
             </div>
             <div className=" mt-10">
-              <Link href="/accounts"><button  onClick={submitHandler} className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button></Link>
+              <button  onClick={submitHandler} className="bg-main font-bold active:scale-95 rounded-sm p-3 shadow-md cursor-pointer w-full">Sign in</button>
             </div>
         </form>
 
@@ -89,13 +88,13 @@ const Login: React.FC = () => {
       </button>
       </div>
       <div className="mt-5 w-full">
-      <Link href="/accounts"><button
+      <button
         className="bg-zinc-200 rounded-md p-2 flex gap-8 items-center justify-center shadow-sm border text-black w-full active:scale-95"
         onClick={signInAnonymouslyHandler}
       >
         <Image src="/anon.svg" alt="anon" width={30} height={30} />{" "}
         Sign in anonymously
-      </button></Link>
+      </button>
       </div>
       <div className="flex justify-center mt-5">
         <div className=" text-center flex gap-3">
