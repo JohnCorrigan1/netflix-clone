@@ -4,7 +4,7 @@ import React, { Dispatch, SetStateAction } from "react";
 const NewAccount: React.FC<{
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-}> = (props) => {;
+}> = (props) => {
   const modalHandler = () => {
     props.setIsOpen(true);
   };

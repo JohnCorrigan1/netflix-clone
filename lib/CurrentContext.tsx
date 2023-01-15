@@ -1,7 +1,6 @@
 import FeaturedMovie from "../models/FeaturedMovie";
 import React, { useState, createContext } from "react";
 
-
 type CurrentContextType = {
   movie: FeaturedMovie | null;
   isOpen: boolean;
@@ -10,10 +9,10 @@ type CurrentContextType = {
 };
 
 export const CurrentContext = createContext<CurrentContextType>({
-    movie: null,
-    isOpen: false,
-    setCurrent: () => {},
-    setIsModalOpen: (isOpen: boolean) => {},
+  movie: null,
+  isOpen: false,
+  setCurrent: () => {},
+  setIsModalOpen: (isOpen: boolean) => {},
 });
 
 type Props = {
@@ -27,7 +26,7 @@ const CurrentContextProvider: React.FC<Props> = (props) => {
     movie: movie,
     isOpen: isOpen,
     setIsModalOpen: (isOpen: boolean) => {
-        setIsOpen(!isOpen);
+      setIsOpen(!isOpen);
     },
     setCurrent: (movie: FeaturedMovie) => {
       setMovie(movie);

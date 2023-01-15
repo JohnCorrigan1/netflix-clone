@@ -10,21 +10,20 @@ import LibraryContextProvider from "../lib/FavoritesContext";
 import AccountContextProvider from "../lib/AccountsContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
   const [user] = useAuthState(auth);
 
   return (
     <AccountContextProvider>
-    <LibraryContextProvider>
-    <CurrentContextProvider>
-    <MovieContextProvider>
-      <UserContext.Provider value={{ user }}>
-        <Component {...pageProps} />
-        <Toaster />
-      </UserContext.Provider>
-    </MovieContextProvider>
-    </CurrentContextProvider>
-    </LibraryContextProvider>
+      <LibraryContextProvider>
+        <CurrentContextProvider>
+          <MovieContextProvider>
+            <UserContext.Provider value={{ user }}>
+              <Component {...pageProps} />
+              <Toaster />
+            </UserContext.Provider>
+          </MovieContextProvider>
+        </CurrentContextProvider>
+      </LibraryContextProvider>
     </AccountContextProvider>
   );
 }

@@ -4,7 +4,6 @@ import FeaturedMovie from "../models/FeaturedMovie";
 import Image from "next/image";
 import { CurrentContext } from "../lib/CurrentContext";
 
-
 const FeatureInfo: React.FC<{ movie: FeaturedMovie }> = (props) => {
   const movieContext = useContext(MovieContext);
   const currentContext = useContext(CurrentContext);

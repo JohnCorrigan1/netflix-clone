@@ -28,7 +28,6 @@ const CreateAccount: React.FC = () => {
         const errorMessage = error.message;
         toast.error("Error: " + errorMessage, errorCode);
       });
-      
   };
 
   const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

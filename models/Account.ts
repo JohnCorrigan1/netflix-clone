@@ -9,12 +9,11 @@ export default class Account {
     this.library = library;
   }
 
-    addMovie(movie: FeaturedMovie) {
-        this.library.push(movie)
-    }
+  addMovie(movie: FeaturedMovie) {
+    this.library.push(movie);
+  }
 
-    removeMovie(movie: FeaturedMovie) {
-        this.library = this.library.filter(m => m.id !== movie.id)
-    }
-    
+  removeMovie(movie: FeaturedMovie) {
+    this.library = this.library.filter((m) => m.id !== movie.id);
+  }
 }

@@ -7,7 +7,7 @@ const Account: React.FC<{ name: string }> = (props) => {
   const accountContext = useContext(AccountContext);
 
   const accountHandler = () => {
-    accountContext.setCurrentAccount(props.name)
+    accountContext.setCurrentAccount(props.name);
   };
 
   return (
