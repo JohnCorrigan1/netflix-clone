@@ -3,25 +3,18 @@ import Head from 'next/head'
 import Account from '../components/Account'
 import NewAccount from '../components/NewAccount'
 import NavBar from '../components/NavBar'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import AccountModal from '../components/AccountModal'
-import { AccountContext } from "../lib/AccountsContext"
-import { collection, doc, getDocs, query, where } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { auth, db } from '../lib/firebase'
-import { UserContext } from '../lib/AuthContext'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Accounts: NextPage = () => {
 
     const [isOpen, setIsOpen  ] = useState(false)
-    const accountContext = useContext(AccountContext)
     const [user] = useAuthState(auth)
     const [accounts, setAccounts] = useState<string[]>([])
 
-    // type AccountData = {
-    //     username: string
-
-    // }
     useEffect(() => {
         if(user)
         getAccounts()

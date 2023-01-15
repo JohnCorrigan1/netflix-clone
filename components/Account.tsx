@@ -1,24 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../lib/AuthContext";
+import { useContext } from "react";
 import { AccountContext } from "../lib/AccountsContext";
-import Accounts from "../pages/accounts";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../lib/firebase";
 
 const Account: React.FC<{ name: string }> = (props) => {
   const accountContext = useContext(AccountContext);
-  const { user } = useContext(UserContext)
 
   const accountHandler = () => {
     accountContext.setCurrentAccount(props.name)
   };
-
-  useEffect(() => {
-    // getAccounts()
-  }, [])
-  
 
   return (
     <Link href="/">

@@ -1,6 +1,5 @@
 import { createContext, useState } from 'react';
 import FeaturedMovie from '../models/FeaturedMovie';
-import MovieContextProvider from './MovieContext';
 
 
 export interface LibraryContextType {

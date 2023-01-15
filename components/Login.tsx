@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useContext, useEffect } from "react";
-import { signInWithPopup, signInAnonymously, signInWithEmailAndPassword, getAuth, User } from "firebase/auth";
-import { UserContext } from "../lib/AuthContext";
-import { auth, db, googleProvider } from "../lib/firebase";
+import React, { useState, useEffect } from "react";
+import { signInWithPopup, signInAnonymously, signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { auth, googleProvider } from "../lib/firebase";
 import toast from 'react-hot-toast';
-import { addDoc, collection } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 

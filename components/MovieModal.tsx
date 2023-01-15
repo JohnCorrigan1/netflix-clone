@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
 import { LibraryContext } from '../lib/FavoritesContext';
 import { AccountContext } from '../lib/AccountsContext';
-import { addDoc, collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { UserContext } from "../lib/AuthContext";
 import toast from "react-hot-toast";
@@ -30,7 +30,6 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
   //add movie to library array in firestore under the current users accounts collection by account username field
   const addMovie = async () => {
         try {
-          // const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount!.username, "library")
           const docRef = setDoc(doc(db, "users", user!.uid, "accounts", accountContext.currentAccount, "library", props.movie!.title), {
             title: props.movie!.title,
             backdropPath: props.movie!.backdropPath,
@@ -38,16 +37,13 @@ const MovieModal: React.FC<{ open: boolean, movie: FeaturedMovie | null }> = (pr
             overview: props.movie!.overview,
             posterPath: props.movie!.posterPath,
             releaseDate: props.movie!.releaseDate,
-            voteAverage: props.movie!.voteAverage,
-            // mediaType: props.movie?.mediaType
+            voteAverage: props.movie!.voteAverage
           });
           toast.success("Document written");
         } catch (e) {
           toast.error("Error adding document" + e);
         }
       }
-    // });
-  // }
 
 
 if (!props.open) return null

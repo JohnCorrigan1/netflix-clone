@@ -1,6 +1,5 @@
 import FeaturedMovie from "../models/FeaturedMovie";
-import React, { useState, createContext, useContext } from "react";
-import { MovieContext } from "./MovieContext";
+import React, { useState, createContext } from "react";
 
 
 type CurrentContextType = {

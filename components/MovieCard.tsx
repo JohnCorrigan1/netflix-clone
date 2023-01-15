@@ -2,23 +2,17 @@ import Image from "next/image";
 import FeaturedMovie from "../models/FeaturedMovie";
 import { useState, useContext, useEffect } from "react";
 import { CurrentContext } from "../lib/CurrentContext";
-import { LibraryContext } from "../lib/FavoritesContext";
 
 const MovieCard: React.FC<{ movie: FeaturedMovie }> = (props) => {
   const [isShown, setIsShown] = useState(false);
   const [timeoutId, setTimeoutId] = useState<any>(null)
 
   const currentContext = useContext(CurrentContext);
-  const libraryContext = useContext(LibraryContext);
 
   const modalHandler = () => {
     currentContext.setIsModalOpen(currentContext.isOpen);
     currentContext.setCurrent(props.movie);
   };
-
-  const addLibraryHandler = () => {
-    libraryContext.addLibraryHandler(props.movie!);
-  }
 
   useEffect(() => {
     return () => {

@@ -1,11 +1,10 @@
-import { getAdditionalUserInfo, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
-import { auth, db } from "../lib/firebase";
+import { auth } from "../lib/firebase";
 
 const CreateAccount: React.FC = () => {
   const [email, setEmail] = useState("");
