@@ -3,13 +3,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB_g1DbDjm5nKJLzH3hmuvQwxyNspnH5RI",
-  authDomain: "notflix-62ee5.firebaseapp.com",
-  projectId: "notflix-62ee5",
-  storageBucket: "notflix-62ee5.appspot.com",
-  messagingSenderId: "969301244760",
-  appId: "1:969301244760:web:fe5cf41698b6c88199032d",
-  measurementId: "G-BLD6W6H2V5",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
